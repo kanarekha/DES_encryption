@@ -82,9 +82,9 @@ def permute(k, arr, n):
         permutation = permutation + k[arr[i] - 1]
     return permutation
 
-def shift_left(k, nth_shifts):
+def shift_left(k, n_shifts):
     s = ""
-    for i in range(nth_shifts):
+    for i in range(n_shifts):
         for j in range(1, len(k)):
             s = s + k[j]
         s = s + k[0]
@@ -182,17 +182,17 @@ final_permute = [40, 8, 48, 16, 56, 24, 64, 32,
               33, 1, 41, 9, 49, 17, 57, 25]
 
 # Fungsi enkripsi chiper
-def encrypt(pt, rkb, rk):
+def encrypt(plain_text, rkb, rk):
     # mengubah plain text heksadecimal ke binary
-    pt = hex_to_bin(pt)
+    plain_text = hex_to_bin(plain_text)
 
     # Melakukan Initial Permutation
-    pt = permute(pt, initial_permute, 64)
+    plain_text = permute(plain_text, initial_permute, 64)
     # print("Hasil setelah permutasi awal", bin_to_hex(pt))
 
     # Matriks plain text dibagi menjadi 2 bagian . Bagian kiri 32 bit dan bagian kanan 32 bit
-    left = pt[0:32]
-    right = pt[32:64]
+    left = plain_text[0:32]
+    right = plain_text[32:64]
     for i in range(0, 16):
         # Melakukan Expansi pada blok bagian kanan dari 32 bit menjadi 48 bit
         right_expanded = permute(right, exp_d, 48)
@@ -278,7 +278,7 @@ right = key[28:56]
 
 # Roundkey binary
 rkb = []
-# RoundKeys hexadecimal
+# RoundKey hexadecimal
 rk = []
 for i in range(0, 16):
     # Melakukan pergeseran bit
@@ -287,7 +287,7 @@ for i in range(0, 16):
 
     combine_str = left + right
 
-    # Kompresi key dari 56 bit menajadi 48 bit
+    # Kompresi key dari 56 bit menjadi 48 bit
     round_key = permute(combine_str, key_comp, 48)
 
     rkb.append(round_key)
