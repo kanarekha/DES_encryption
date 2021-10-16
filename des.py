@@ -240,9 +240,6 @@ print(".")
 print(".")
 
 # KEY
-# Konversi key ke binary
-key = hex_to_bin(key)
-
 # Matriks permutasi kompresi PC-1
 keyp = [57, 49, 41, 33, 25, 17, 9,
         1, 58, 50, 42, 34, 26, 18,
@@ -252,9 +249,6 @@ keyp = [57, 49, 41, 33, 25, 17, 9,
         7, 62, 54, 46, 38, 30, 22,
         14, 6, 61, 53, 45, 37, 29,
         21, 13, 5, 28, 20, 12, 4]
-
-# Melakukan permutasi key
-key = permute(key, keyp, 56)
 
 # Matriks untuk pergeseran bit tiap rounds
 shift_table = [1, 1, 2, 2,
@@ -272,6 +266,10 @@ key_comp = [14, 17, 11, 24, 1, 5,
             44, 49, 39, 56, 34, 53,
             46, 42, 50, 36, 29, 32]
 
+# Konversi key ke binary
+key = hex_to_bin(key)
+# Melakukan permutasi key
+key = permute(key, keyp, 56)
 # Key dibagi menjadi 2 bagian . Blok bagian kiri dan blok bagian kanan
 left = key[0:28]
 right = key[28:56]
